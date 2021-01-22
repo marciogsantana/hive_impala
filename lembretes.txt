@@ -1,0 +1,60 @@
+hive:
+
+1-metadados sao informaçoes sobre os dados exemplo tipo de dados, valor  etc
+
+2- o metados nao fica no hdfs , fica por padrao no mysql , entretanto ele uma tabela no hive aponta para um arquivo no hdfs
+
+3-este arquivo no hdfs por estar em várias tabelas e compartilhado com outras aplicaçoes do    ecossistema hadoop
+
+4- quando apega uma tabela apaga apenas o metadados e nao o arquivo no hdfs
+
+5- hive permite salvar os dados no hdfs ou local  (como uma consulta normal sql select * from nome da tabela) sintaxe nos pdfs
+
+6- hive aceita partiçoes por exemplo um modelo de veiculos ou marca por exemplo por partiçao ou seja uma pertiçao fisica e logica para otimizaçao
+6.1 partition
+6.2bucketing numero de partiçoes fixos
+
+7- tabela temporários dura apenas enquanto a sessao está aberta, ou seja saiu do aplicativo a tabela é perdida ideal para dados que estao sendo transformados
+
+8- views estrutura fixa para consultas , ao inves de programar o relatório é mais indicado fazer views para informaçoes (relatorios) que sempre sao utilizados
+
+9- hive nao suporta operaçoes update e delete padrao data warehouse a nao ser que seja configurado
+
+10- otimizaçoes:
+
+10.1 vetorizaçao 1024 linhas por vez de leitura
+
+
+* select * from nome da tabela (todas as colunas)
+* select nome da coluna, nome da coluna from tabela  (apenas as colunas selecionadas)
+* select distinct (nome da coluna) from nome da tabela
+* select * from (nome da tabela) where (condiçao) status = and condiçao >= 
+* select * from (nome da coluna) order by (nome da coluna), (nome da coluna)
+* select * from (nome da coluna) order by (dome da coluna) desc;
+* select * from (nome da coluna) limit 5
+* select max(total) from (nome da tabela)
+* select min(total) from (nome da tabela)
+outras funçoes count,avg,sum  avg(media)
+* select * from (nome da tabela) where (nome da coluna)  like "pedaço da string%"
+* select * from (nome da tabela) where (nome da coluna)  in ("nome do campo", "nome do campo") // in faz a junçao
+* select * from (nome da tabela) where (nome da coluna)  not in ("nome do campo", "nome do campo") //  pesquisa fora do conjunto
+* select * from (nome da tabela) where (nome da coluna) between campo and campo // (intervalo entre os campos)
+
+sqoop // faz ingestao de dados coletando de um banco relacional para hdfs ou hive
+
+sqoop caracteristicas:
+
+1- suporta ate 4 atividades paralelas
+2- precisa de chaves primarias
+3- faz a divisao usando chaves primarias para fazer o balanceamento das cargas parametro m para informar número de processos paralelos
+4- suporta modo incremental:
+4.1 append para tabelas que tem novos registros importando os novos registros usando um id 
+4.2 atualiza usando a propriedade time stamp nos registros para verificar quais precisam atualizaçao
+
+formtaro ORC:
+
+padrao do escossistema hadoop, formato otimizado para analise arquivos ficam menores (melhor compressao)
+
+
+
+
